@@ -10,12 +10,14 @@ const Layout: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      <main className={`${user?.role !== 'admin' ? 'pb-20' : ''} pt-4`}>
-        <div className="max-w-6xl mx-auto px-4">
-          <Outlet />
-        </div>
-      </main>
-      <Navbar />
+      <div className="flex">
+        <Navbar />
+        <main className={`flex-1 ${user?.role !== 'admin' ? 'pb-20 md:pb-4 md:ml-64' : ''} pt-4`}>
+          <div className="max-w-6xl mx-auto px-4">
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

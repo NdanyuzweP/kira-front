@@ -1,34 +1,29 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { LogOut, Settings } from 'lucide-react';
 
 const Header: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+    <header className="bg-white px-4 py-4 border-b border-gray-100">
       <div className="flex justify-between items-center max-w-6xl mx-auto">
-        <div>
-          <h1 className="text-xl font-semibold text-gray-900">P2P Trading</h1>
-          {user && (
-            <p className="text-sm text-gray-600">
-              Welcome, {user.username} ({user.role})
-            </p>
-          )}
+        <div className="flex items-center space-x-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-teal-400 to-blue-500 rounded-xl flex items-center justify-center">
+            <span className="text-white font-bold text-xl">V</span>
+          </div>
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">Vilarbucks</h1>
+          </div>
         </div>
         
-        <div className="flex items-center space-x-2">
-          {user?.role === 'admin' && (
-            <button className="p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100">
-              <Settings size={20} />
-            </button>
+        <div className="flex items-center space-x-3">
+          {user && (
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
+              <span className="text-white font-semibold text-sm">
+                {user.username?.charAt(0).toUpperCase() || 'U'}
+              </span>
+            </div>
           )}
-          <button
-            onClick={logout}
-            className="p-2 text-gray-600 hover:text-red-600 rounded-lg hover:bg-gray-100"
-          >
-            <LogOut size={20} />
-          </button>
         </div>
       </div>
     </header>
