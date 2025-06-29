@@ -48,40 +48,6 @@ export interface Currency {
   updatedAt?: string;
 }
 
-// Wallet Types
-export interface Wallet {
-  id: number;
-  userId: number;
-  currencyId: number;
-  balance: number;
-  frozenBalance: number;
-  address?: string;
-  isActive: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-  currency?: Currency;
-}
-
-export interface Transaction {
-  id: number;
-  userId: number;
-  walletId: number;
-  orderId?: number;
-  type: 'deposit' | 'withdrawal' | 'trade' | 'fee' | 'reward';
-  amount: number;
-  fee: number;
-  status: 'pending' | 'confirmed' | 'failed' | 'cancelled';
-  txHash?: string;
-  fromAddress?: string;
-  toAddress?: string;
-  confirmations: number;
-  requiredConfirmations: number;
-  metadata?: any;
-  createdAt?: string;
-  updatedAt?: string;
-  wallet?: Wallet;
-}
-
 // Order Types
 export interface Order {
   id: number;
@@ -151,6 +117,40 @@ export interface Subscription {
   isActive: boolean;
   createdAt?: string;
   updatedAt?: string;
+}
+
+// Wallet Types
+export interface Wallet {
+  id: number;
+  userId: number;
+  currencyId: number;
+  balance: number;
+  frozenBalance: number;
+  address?: string;
+  isActive: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  currency?: Currency;
+}
+
+export interface Transaction {
+  id: number;
+  userId: number;
+  walletId: number;
+  orderId?: number;
+  type: 'deposit' | 'withdrawal' | 'trade' | 'fee' | 'reward';
+  amount: number;
+  fee: number;
+  status: 'pending' | 'confirmed' | 'failed' | 'cancelled';
+  txHash?: string;
+  fromAddress?: string;
+  toAddress?: string;
+  confirmations: number;
+  requiredConfirmations: number;
+  metadata?: any;
+  createdAt?: string;
+  updatedAt?: string;
+  wallet?: Wallet;
 }
 
 // KYC Types

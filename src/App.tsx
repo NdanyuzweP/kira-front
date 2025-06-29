@@ -11,6 +11,7 @@ import Team from './components/Team/Team';
 import Wallet from './components/Wallet/Wallet';
 import Profile from './components/Profile/Profile';
 import AdminDashboard from './components/Admin/AdminDashboard';
+import MessageCenter from './components/Messages/MessageCenter';
 
 function App() {
   return (
@@ -71,7 +72,8 @@ function App() {
               <Route path="tasks" element={<Tasks />} />
               <Route path="team" element={<Team />} />
               <Route path="wallet/*" element={<Wallet />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="profile/*" element={<Profile />} />
+              <Route path="messages" element={<MessageCenter />} />
               
               {/* Default redirect */}
               <Route path="" element={<Navigate to="/dashboard" replace />} />

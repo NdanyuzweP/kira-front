@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { walletService } from '../../services/wallets';
 import { currencyService } from '../../services/currencies';
-import type { Currency, Wallet } from '../../types';
+import { Currency, Wallet } from '../../types';
 import { ArrowUpRight } from 'lucide-react';
 import toast from 'react-hot-toast';
 

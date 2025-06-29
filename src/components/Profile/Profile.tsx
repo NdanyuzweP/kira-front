@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { userService } from '../../services/users';
-import { User, Edit, Copy, Share2 } from 'lucide-react';
+import { User, Edit, Copy, Share2, Shield, CreditCard, AlertTriangle, BarChart3 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import KYCVerification from '../KYC/KYCVerification';
+import PaymentMethods from '../PaymentMethods/PaymentMethods';
+import DisputeCenter from '../Disputes/DisputeCenter';
+import TradingDashboard from '../Trading/TradingDashboard';
 
-const Profile: React.FC = () => {
+const ProfileOverview: React.FC = () => {
   const { user, logout } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -70,11 +75,6 @@ const Profile: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
-        <p className="text-gray-600">Manage your account information</p>
-      </div>
-
       {/* Profile Information */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="p-6 border-b border-gray-200">
@@ -237,26 +237,6 @@ const Profile: React.FC = () => {
         </div>
         <div className="p-6">
           <div className="space-y-3">
-            <button className="w-full text-left px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">Security Settings</p>
-                  <p className="text-sm text-gray-600">Change password, enable 2FA</p>
-                </div>
-                <User className="h-5 w-5 text-gray-400" />
-              </div>
-            </button>
-            
-            <button className="w-full text-left px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">KYC Verification</p>
-                  <p className="text-sm text-gray-600">Complete identity verification</p>
-                </div>
-                <User className="h-5 w-5 text-gray-400" />
-              </div>
-            </button>
-
             <button
               onClick={logout}
               className="w-full text-left px-4 py-3 bg-red-50 rounded-lg hover:bg-red-100 transition-colors text-red-600"
@@ -270,6 +250,60 @@ const Profile: React.FC = () => {
               </div>
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Profile: React.FC = () => {
+  const navItems = [
+    { to: 'overview', label: 'Overview', icon: User },
+    { to: 'kyc', label: 'KYC Verification', icon: Shield },
+    { to: 'payment-methods', label: 'Payment Methods', icon: CreditCard },
+    { to: 'disputes', label: 'Disputes', icon: AlertTriangle },
+    { to: 'trading', label: 'Trading', icon: BarChart3 },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
+        <p className="text-gray-600">Manage your account information and settings</p>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="border-b border-gray-200">
+          <nav className="flex space-x-8 px-6">
+            {navItems.map(({ to, label, icon: Icon }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `flex items-center py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                    isActive
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`
+                }
+              >
+                <Icon className="h-4 w-4 mr-2" />
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+
+        <div className="p-6">
+          <Routes>
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<ProfileOverview />} />
+            <Route path="kyc" element={<KYCVerification />} />
+            <Route path="payment-methods" element={<PaymentMethods />} />
+            <Route path="disputes" element={<DisputeCenter />} />
+            <Route path="trading" element={<TradingDashboard />} />
+          </Routes>
         </div>
       </div>
     </div>
